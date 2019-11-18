@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.google.cloud.tools.jib' version '1.0.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.vertx:vertx-web:3.8.3'
+}
+
+mainClassName = 'es.andrewazor.demo.Main'
+
+def baseImage = 'gcr.io/distroless/java:11';
+def version = '0.1.0';
+
+jib {
+    from {
+        image = baseImage
+    }
+    to {
+        image = "quay.io/andrewazores/vertx-fib-demo"
+        tags = [version, 'latest']
+    }
+    container {
+        useCurrentTimestamp = true
+        ports = [ '9091' ]
+        jvmFlags = [
+            '-Dcom.sun.management.jmxremote.port=9091',
+            '-Dcom.sun.management.jmxremote.ssl=false',
+            '-Dcom.sun.management.jmxremote.authenticate=false',
+            '-Dcom.sun.management.jmxremote.autodiscovery=true',
+        ]
+    }
+}
+
+applicationDefaultJvmArgs = jib.container.jvmFlags
