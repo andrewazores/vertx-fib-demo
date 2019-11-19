@@ -24,7 +24,7 @@ function startAuto() {
     return;
   }
   window.runAuto = true;
-  var i = 0;
+  var i = window.min;
   var next = function() {
     if (!window.runAuto) {
       return;
@@ -32,6 +32,9 @@ function startAuto() {
     var delay = 1 * 1000;
     doFib(i, function() { setTimeout(next, delay); });
     i++;
+    if (i > window.max) {
+      i = window.min;
+    }
   }
   next.apply();
 }
@@ -45,5 +48,29 @@ function stopAuto() {
 function setTableHeaders() {
   $("table").append("<tr><th>Index</th><th>Value</th></tr>");
 }
+
+function setMin(v) {
+  if (v < 1) {
+    return;
+  }
+  if (v > window.max) {
+    return;
+  }
+  window.min = v;
+}
+
+function setMax(v) {
+  if (v > 40) {
+    return;
+  }
+  if (v < window.min) {
+    return;
+  }
+  window.max = v;
+}
+
+window.runAuto = false;
+window.min = 1;
+window.max = 32;
 
 $(document).ready(setTableHeaders);

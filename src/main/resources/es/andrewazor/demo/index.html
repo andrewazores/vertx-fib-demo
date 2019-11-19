@@ -7,8 +7,16 @@
     <script type="text/javascript" src="fib.js"></script>
   </head>
   <body>
-    <button onclick="startAuto()">Start</button>
-    <button onclick="stopAuto()">Stop</button>
-    <table></table>
+    <p>
+      Min: <input type="number" name="min" oninput="setMin(this.value)">
+      Max: <input type="number" name="max" oninput="setMax(this.value)">
+    </p>
+    <p>
+      <button onclick="startAuto()">Start</button>
+      <button onclick="stopAuto()">Stop</button>
+    </p>
+    <p>
+      <table></table>
+    </p>
   </body>
 </html>
