@@ -19,6 +19,6 @@ docker run \
     --net container-jfr \
     --hostname vertx-fib-demo \
     --name vertx-fib-demo \
-    --memory 80M \
-    --cpus 1.0 \
+    --memory 256M \
+    --cpus 0.5 \
     --rm -it quay.io/andrewazores/vertx-fib-demo:latest "$@"
