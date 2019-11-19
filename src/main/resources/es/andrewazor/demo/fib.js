@@ -16,7 +16,11 @@ function fib(i, onresult, oncomplete) {
 }
 
 function doFib(i, oncomplete) {
-  fib(i, function(res) { $("table").append("<tr><td>" + i + "</td><td>" + res + "</td></tr>"); }, oncomplete);
+  fib(i, function(res) {
+    if (window.runAuto) {
+      $("table").append("<tr><td>" + i + "</td><td>" + res + "</td></tr>");
+    }
+  }, oncomplete);
 }
 
 function startAuto() {
