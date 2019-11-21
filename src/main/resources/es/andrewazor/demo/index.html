@@ -8,8 +8,8 @@
   </head>
   <body>
     <p>
-      Min: <input type="number" name="min" oninput="setMin(this.value)">
-      Max: <input type="number" name="max" oninput="setMax(this.value)">
+      Min: <input type="number" name="min" min="0" step="1" value="0" oninput="setMin(this.value)">
+      Max: <input type="number" name="max" max="99" step="1" value="30" oninput="setMax(this.value)">
     </p>
     <p>
       <button onclick="startAuto()">Start</button>
