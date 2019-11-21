@@ -33,8 +33,7 @@ function startAuto() {
     if (!window.runAuto) {
       return;
     }
-    var delay = 1 * 1000;
-    doFib(i, function() { setTimeout(next, delay); });
+    doFib(i, function() { setTimeout(next, window.delay * 1000); });
     i++;
     if (i > window.max) {
       i = window.min;
@@ -73,8 +72,19 @@ function setMax(v) {
   window.max = v;
 }
 
+function setDelay(v) {
+  if (v > 5) {
+    return;
+  }
+  if (v < 0) {
+    return;
+  }
+  window.delay = v;
+}
+
 window.runAuto = false;
 window.min = 1;
 window.max = 32;
+window.delay = 1;
 
 $(document).ready(setTableHeaders);
