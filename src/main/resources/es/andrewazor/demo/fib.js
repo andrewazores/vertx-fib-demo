@@ -53,32 +53,14 @@ function setTableHeaders() {
 }
 
 function setMin(v) {
-  if (v < 1) {
-    return;
-  }
-  if (v > window.max) {
-    return;
-  }
   window.min = v;
 }
 
 function setMax(v) {
-  if (v > 40) {
-    return;
-  }
-  if (v < window.min) {
-    return;
-  }
   window.max = v;
 }
 
 function setDelay(v) {
-  if (v > 5) {
-    return;
-  }
-  if (v < 0) {
-    return;
-  }
   window.delay = v;
 }
 
