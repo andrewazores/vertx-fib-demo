@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.google.cloud.tools.jib' version '1.0.1'
+    id 'com.google.cloud.tools.jib' version '2.1.0'
 }
 
 repositories {
@@ -15,7 +15,7 @@ dependencies {
 mainClassName = 'es.andrewazor.demo.Main'
 
 def baseImage = 'gcr.io/distroless/java:11';
-def version = '0.1.0';
+def version = '0.2.0';
 
 jib {
     from {
@@ -25,14 +25,18 @@ jib {
         image = "quay.io/andrewazores/vertx-fib-demo"
         tags = [version, 'latest']
     }
+    dockerClient {
+        executable = '/usr/bin/podman'
+    }
     container {
-        useCurrentTimestamp = true
+        creationTime = 'USE_CURRENT_TIMESTAMP'
         ports = [
         '8080',
-        '9091',
+        '9093',
         ]
         jvmFlags = [
-            '-Dcom.sun.management.jmxremote.port=9091',
+            '-Dcom.sun.management.jmxremote.port=9093',
+            '-Dcom.sun.management.jmxremote.rmi.port=9093',
             '-Dcom.sun.management.jmxremote.ssl=false',
             '-Dcom.sun.management.jmxremote.authenticate=false',
             '-Dcom.sun.management.jmxremote.autodiscovery=true',
