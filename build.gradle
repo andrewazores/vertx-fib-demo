@@ -38,8 +38,17 @@ jib {
             '-Dcom.sun.management.jmxremote.port=9093',
             '-Dcom.sun.management.jmxremote.rmi.port=9093',
             '-Dcom.sun.management.jmxremote.ssl=false',
-            '-Dcom.sun.management.jmxremote.authenticate=false',
+            '-Dcom.sun.management.jmxremote.authenticate=true',
+            '-Dcom.sun.management.jmxremote.password.file=/app/resources/jmxremote.password',
+            '-Dcom.sun.management.jmxremote.access.file=/app/resources/jmxremote.access',
             '-Dcom.sun.management.jmxremote.autodiscovery=true',
+        ]
+    }
+    extraDirectories {
+        paths = 'src/main/extras'
+        permissions = [
+            '/app/resources/jmxremote.password': '400',
+            '/app/resources/jmxremote.access': '400',
         ]
     }
 }
