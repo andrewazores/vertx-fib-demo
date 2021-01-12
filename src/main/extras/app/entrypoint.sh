@@ -5,7 +5,6 @@ set -e
 
 FLAGS=(
     "-XX:+CrashOnOutOfMemoryError"
-    "-Djava.rmi.server.hostname=vertx-fib-demo"
     "-Dcom.sun.management.jmxremote.autodiscovery=true"
     "-Dcom.sun.management.jmxremote.port=9093"
     "-Dcom.sun.management.jmxremote.rmi.port=9093"
