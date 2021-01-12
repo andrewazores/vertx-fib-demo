@@ -3,11 +3,15 @@
 set -x
 set -e
 
+if [ -z "$JMX_PORT" ]; then
+    JMX_PORT=9093
+fi
+
 FLAGS=(
     "-XX:+CrashOnOutOfMemoryError"
     "-Dcom.sun.management.jmxremote.autodiscovery=true"
-    "-Dcom.sun.management.jmxremote.port=9093"
-    "-Dcom.sun.management.jmxremote.rmi.port=9093"
+    "-Dcom.sun.management.jmxremote.port=$JMX_PORT"
+    "-Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT"
     "-Dcom.sun.management.jmxremote.authenticate=true"
     "-Dcom.sun.management.jmxremote.password.file=/app/resources/jmxremote.password"
     "-Dcom.sun.management.jmxremote.access.file=/app/resources/jmxremote.access"
