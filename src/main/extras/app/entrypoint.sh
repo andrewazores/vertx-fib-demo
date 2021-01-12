@@ -22,6 +22,10 @@ FLAGS=(
     "-Djavax.net.ssl.keyStorePassword=vertx-fib-demo"
 )
 
+if [ -z "$HOSTNAME" ]; then
+    FLAGS+=("-Djava.rmi.server.hostname=$HOSTNAME")
+fi
+
 java \
     "${FLAGS[@]}" \
     -cp /app/resources:/app/classes:/app/libs/* \
