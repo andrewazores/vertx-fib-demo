@@ -3,7 +3,7 @@
 set -x
 set -e
 
-ARGS=(--name vertx-fib-demo -p 8080:8080 -p 9093:9093)
+ARGS=(--name vertx-fib-demo -p HTTP_PORT -p 9093:9093)
 
 if podman pod exists container-jfr; then
     ARGS+=(--pod container-jfr)
