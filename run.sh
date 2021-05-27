@@ -3,11 +3,11 @@
 set -x
 set -e
 
-ARGS=(--name vertx-fib-demo -p $HTTP_PORT -p 9093:9093)
-
 if [ -z "$HTTP_PORT" ]; then
     HTTP_PORT=8080
 fi
+
+ARGS=(--name vertx-fib-demo -p $HTTP_PORT -p 9093:9093)
 
 if podman pod exists container-jfr; then
     ARGS+=(--pod container-jfr)
