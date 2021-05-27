@@ -14,5 +14,6 @@ if podman pod exists container-jfr; then
 fi
 
 ARGS+=(--rm -it quay.io/andrewazores/vertx-fib-demo:latest)
+ARGS+=(--env HTTP_PORT="$HTTP_PORT")
 
-podman run --env HTTP_PORT="$HTTP_PORT" "${ARGS[@]}"
+podman run "${ARGS[@]}"
