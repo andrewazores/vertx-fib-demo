@@ -15,7 +15,9 @@ public class App extends AbstractVerticle {
     public void start() {
         getVertx().createHttpServer(
                 new HttpServerOptions()
-                .setPort(8080)
+                .setPort(
+                    System.getenv("HTTP_PORT")
+                    )
                 )
             .requestHandler(configureRouter(getVertx()))
             .listen();
