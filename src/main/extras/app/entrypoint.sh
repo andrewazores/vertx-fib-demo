@@ -3,6 +3,10 @@
 set -x
 set -e
 
+if [ -z "$HTTP_PORT" ]; then
+    HTTP_PORT=8080
+fi
+
 if [ -z "$JMX_PORT" ]; then
     JMX_PORT=9093
 fi
