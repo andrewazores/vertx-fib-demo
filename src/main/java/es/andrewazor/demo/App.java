@@ -13,11 +13,11 @@ public class App extends AbstractVerticle {
 
     @Override
     public void start() {
+        int port = getHttpPortEnvVar();
+
         getVertx().createHttpServer(
                 new HttpServerOptions()
-                .setPort(
-                    System.getenv("HTTP_PORT")
-                    )
+                .setPort(port)
                 )
             .requestHandler(configureRouter(getVertx()))
             .listen();
@@ -55,6 +55,14 @@ public class App extends AbstractVerticle {
         BigInteger n1 = fib(i.subtract(BigInteger.ONE));
         BigInteger n2 = fib(i.subtract(BigInteger.TWO));
         return n1.add(n2);
+    }
+
+    static int getHttpPortEnvVar() {
+        try {
+            return Integer.parseInt(System.getenv("HTTP_PORT"));
+        } catch(NumberFormatException e) {
+            return 8080;
+        }
     }
 
 }
