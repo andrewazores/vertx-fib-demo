@@ -7,7 +7,7 @@ if [ -z "$HTTP_PORT" ]; then
     HTTP_PORT=8080
 fi
 
-ARGS=(--name vertx-fib-demo -p $HTTP_PORT:$HTTP_PORT -p 9093:9093)
+ARGS=(--name vertx-fib-demo -p $HTTP_PORT:$HTTP_PORT -p 9093:9093 --rm)
 
 if podman pod exists cryostat; then
     ARGS+=(--pod cryostat)
