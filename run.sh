@@ -9,8 +9,8 @@ fi
 
 ARGS=(--name vertx-fib-demo -p $HTTP_PORT:$HTTP_PORT -p 9093:9093)
 
-if podman pod exists container-jfr; then
-    ARGS+=(--pod container-jfr)
+if podman pod exists cryostat; then
+    ARGS+=(--pod cryostat)
 fi
 
 ARGS+=(--env HTTP_PORT="$HTTP_PORT")
