@@ -16,7 +16,6 @@ FLAGS=(
     "-Dcom.sun.management.jmxremote.autodiscovery=true"
     "-Dcom.sun.management.jmxremote.port=$JMX_PORT"
     "-Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT"
-    "-Dcom.sun.management.jmxremote.ssl.need.client.auth=false"
 )
 
 if [ -z "$HOSTNAME" ]; then
@@ -44,6 +43,14 @@ if [ ! -z "$USE_AUTH" ]; then
     FLAGS+=("-Dcom.sun.management.jmxremote.access.file=${d}/jmxremote.access")
 else
     FLAGS+=("-Dcom.sun.management.jmxremote.authenticate=false")
+fi
+
+if [ ! -z "$CLIENT_AUTH" ]; then
+    FLAGS+=("-Dcom.sun.management.jmxremote.ssl.need.client.auth=true")
+    FLAGS+=("-Djavax.net.ssl.trustStore=/truststore/truststore.p12")
+    FLAGS+=("-Djavax.net.ssl.trustStorePassword=$KEYSTORE_PASS")
+else
+    FLAGS+=("-Dcom.sun.management.jmxremote.ssl.need.client.auth=false")
 fi
 
 exec java \
