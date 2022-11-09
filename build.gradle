@@ -16,7 +16,7 @@ mainClassName = 'es.andrewazor.demo.Main'
 
 def baseImage = 'registry.access.redhat.com/ubi8/openjdk-17-runtime';
 def baseImageTag = '1.13-1';
-def version = '0.9.0';
+def version = '0.9.1';
 
 jib {
     from {
@@ -41,8 +41,8 @@ jib {
         paths = 'src/main/extras'
         permissions = [
             '/app/entrypoint.sh': '755',
-            '/app/resources/jmxremote.password': '440',
-            '/app/resources/jmxremote.access': '440',
+            '/app/resources/jmxremote.password.in': '440',
+            '/app/resources/jmxremote.access.in': '440',
         ]
     }
 }

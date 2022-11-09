@@ -34,9 +34,14 @@ else
 fi
 
 if [ ! -z "$USE_AUTH" ]; then
+    d="$(mktemp -d)"
+    cp /app/resources/jmxremote.password.in "${d}/jmxremote.password"
+    chmod 400 "${d}/jmxremote.password"
+    cp /app/resources/jmxremote.access.in "${d}/jmxremote.access"
+    chmod 400 "${d}/jmxremote.access"
     FLAGS+=("-Dcom.sun.management.jmxremote.authenticate=true")
-    FLAGS+=("-Dcom.sun.management.jmxremote.password.file=/app/resources/jmxremote.password")
-    FLAGS+=("-Dcom.sun.management.jmxremote.access.file=/app/resources/jmxremote.access")
+    FLAGS+=("-Dcom.sun.management.jmxremote.password.file=${d}/jmxremote.password")
+    FLAGS+=("-Dcom.sun.management.jmxremote.access.file=${d}/jmxremote.access")
 else
     FLAGS+=("-Dcom.sun.management.jmxremote.authenticate=false")
 fi
