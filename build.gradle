@@ -16,7 +16,7 @@ mainClassName = 'es.andrewazor.demo.Main'
 
 def baseImage = 'registry.access.redhat.com/ubi8/openjdk-17-runtime';
 def baseImageTag = '1.13-1';
-def version = '0.9.1';
+def version = '0.10.0';
 
 jib {
     from {
