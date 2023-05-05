@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     implementation 'io.vertx:vertx-web:4.4.1'
-    javaagent 'io.cryostat:cryostat-agent:0.2.1'
+    javaagent 'io.cryostat:cryostat-agent:0.2.2'
 }
 
 mainClassName = 'es.andrewazor.demo.Main'
