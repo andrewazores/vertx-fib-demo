@@ -55,6 +55,7 @@ fi
 
 exec java \
     "${FLAGS[@]}" \
+    "$@" \
     -cp /app/resources:/app/classes:/app/libs/* \
     es.andrewazor.demo.Main \
     "$@"

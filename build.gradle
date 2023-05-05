@@ -1,22 +1,31 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.google.cloud.tools.jib' version '2.1.0'
+    id 'com.google.cloud.tools.jib' version '3.3.1'
+    id 'com.ryandens.javaagent-jib' version '0.5.0'
 }
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://maven.pkg.github.com/cryostatio/cryostat-agent"
+        credentials {
+            username "myuser"
+            password "mypass"
+        }
+    }
 }
 
 dependencies {
     implementation 'io.vertx:vertx-web:4.2.5'
+    javaagent 'io.cryostat:cryostat-agent:0.2.1'
 }
 
 mainClassName = 'es.andrewazor.demo.Main'
 
-def baseImage = 'registry.access.redhat.com/ubi8/openjdk-17-runtime';
-def baseImageTag = '1.13-1';
-def version = '0.10.0';
+def baseImage = 'registry.access.redhat.com/ubi8/openjdk-17';
+def baseImageTag = 'latest';
+def version = '0.12.0';
 
 jib {
     from {
@@ -30,6 +39,7 @@ jib {
         executable = '/usr/bin/podman'
     }
     container {
+        mainClass = mainClassName
         creationTime = 'USE_CURRENT_TIMESTAMP'
         entrypoint = '/app/entrypoint.sh'
         ports = [
