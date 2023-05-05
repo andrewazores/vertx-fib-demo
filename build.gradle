@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.vertx:vertx-web:4.2.5'
+    implementation 'io.vertx:vertx-web:4.4.1'
     javaagent 'io.cryostat:cryostat-agent:0.2.1'
 }
 
@@ -25,7 +25,7 @@ mainClassName = 'es.andrewazor.demo.Main'
 
 def baseImage = 'registry.access.redhat.com/ubi8/openjdk-17';
 def baseImageTag = 'latest';
-def version = '0.12.0';
+def version = '0.12.1';
 
 jib {
     from {
