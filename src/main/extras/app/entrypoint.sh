@@ -11,6 +11,12 @@ if [ -z "$JMX_PORT" ]; then
     JMX_PORT=9093
 fi
 
+if [ -n "$START_DELAY" ]; then
+    echo "Delaying start by $START_DELAY seconds..."
+    sleep "$START_DELAY"
+    echo "Continuing."
+fi
+
 FLAGS=(
     "-XX:+CrashOnOutOfMemoryError"
     "-Dcom.sun.management.jmxremote.autodiscovery=true"
