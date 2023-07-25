@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -x
 set -e
@@ -22,7 +22,7 @@ if [ -z "$HOSTNAME" ]; then
     FLAGS+=("-Djava.rmi.server.hostname=$HOSTNAME")
 fi
 
-if [ ! -z "$USE_SSL" ]; then
+if [ -n "$USE_SSL" ]; then
     FLAGS+=("-Dcom.sun.management.jmxremote.ssl=true")
     FLAGS+=("-Dcom.sun.management.jmxremote.registry.ssl=true")
     FLAGS+=("-Djavax.net.ssl.keyStore=/app/resources/keystore")
@@ -32,7 +32,7 @@ else
     FLAGS+=("-Dcom.sun.management.jmxremote.registry.ssl=false")
 fi
 
-if [ ! -z "$USE_AUTH" ]; then
+if [ -n "$USE_AUTH" ]; then
     d="$(mktemp -d)"
     cp /app/resources/jmxremote.password.in "${d}/jmxremote.password"
     chmod 400 "${d}/jmxremote.password"
@@ -45,7 +45,7 @@ else
     FLAGS+=("-Dcom.sun.management.jmxremote.authenticate=false")
 fi
 
-if [ ! -z "$CLIENT_AUTH" ]; then
+if [ -n "$CLIENT_AUTH" ]; then
     FLAGS+=("-Dcom.sun.management.jmxremote.ssl.need.client.auth=true")
     FLAGS+=("-Djavax.net.ssl.trustStore=/truststore/truststore.p12")
     FLAGS+=("-Djavax.net.ssl.trustStorePassword=$KEYSTORE_PASS")
