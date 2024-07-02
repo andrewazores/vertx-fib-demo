@@ -21,6 +21,11 @@ dependencies {
     implementation 'io.vertx:vertx-web:4.4.7'
     javaagent 'io.cryostat:cryostat-agent:0.4.0-SNAPSHOT:shaded'
 }
+
+task printVersion {
+  doLast {
+    println(project.findProperty('version'))
+  }
 }
 
 mainClassName = 'es.andrewazor.demo.Main'
@@ -28,13 +33,22 @@ mainClassName = 'es.andrewazor.demo.Main'
 def baseImage = 'registry.access.redhat.com/ubi8/openjdk-17';
 def baseImageTag = 'latest';
 
+def buildArch = System.getenv('JIB_ARCH') ?: 'amd64'
+def buildOs = 'linux'
+
 jib {
     from {
         image = baseImage + ':' + baseImageTag
+        platforms {
+            platform {
+                architecture = buildArch
+                os = buildOs
+            }
+        }
     }
     to {
         image = "quay.io/andrewazores/vertx-fib-demo"
-        tags = [version, 'latest']
+        tags = [buildOs + '-' + buildArch]
     }
     dockerClient {
         executable = '/usr/bin/podman'
