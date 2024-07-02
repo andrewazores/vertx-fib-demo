@@ -19,7 +19,7 @@ fi
 
 FLAGS=(
     "-XX:+CrashOnOutOfMemoryError"
-    "-Dcom.sun.management.jmxremote.autodiscovery=true"
+    "-Dcom.sun.management.jmxremote.autodiscovery=${USE_JDP:-true}"
     "-Dcom.sun.management.jmxremote.port=$JMX_PORT"
     "-Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT"
 )
