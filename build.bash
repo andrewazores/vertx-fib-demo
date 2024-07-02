@@ -13,6 +13,7 @@ for arch in amd64 arm64; do
     echo "Building for ${arch} ..."
     JIB_ARCH="${arch}" sh "${DIR}"/gradlew jibDockerBuild
     podman manifest add "${BUILD_IMG}:${BUILD_TAG}" containers-storage:"${BUILD_IMG}:linux-${arch}"
+    podman rmi "${BUILD_IMG}:linux-${arch}"
 done
 
 podman tag "${BUILD_IMG}:${BUILD_TAG}" "${BUILD_IMG}:latest"
